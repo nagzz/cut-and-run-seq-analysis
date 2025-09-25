@@ -1,0 +1,32 @@
+configfile: "configfastp.json"
+
+RULES_DIR="RULES/"
+
+R1=config["GENERAL"]["separator"]+config["GENERAL"]["paired"][0]
+R2=config["GENERAL"]["separator"]+config["GENERAL"]["paired"][1]
+
+#include:RULES_DIR+"multiqc.rules"
+#include:RULES_DIR+"fastqc.rules"
+#include:RULES_DIR+"adapterremoval.rules"
+#include:RULES_DIR+"fastp.rules"
+include:RULES_DIR+"bwa_paired.rules"
+include:RULES_DIR+"samtools.rules"
+include:RULES_DIR+"bigwig.rules"
+
+
+rule all:
+        input:
+#               expand(config["GENERAL"]["experiment_name"]+"/adapterremoval/trimmed/pe/{sample}_1_trimmed.fq.gz",sample=config["GENERAL"]["samples"]),
+#               expand(config["GENERAL"]["experiment_name"]+"/adapterremoval/trimmed/pe/{sample}_2_trimmed.fq.gz",sample=config["GENERAL"]["samples"]),
+#               expand(config["GENERAL"]["experiment_name"]+"/QC/CLEANED/adapterremoval/{sample}"+R1+"_trimmed_fastqc.html",sample=config["GENERAL"]["samples"]),
+#               expand(config["GENERAL"]["experiment_name"]+"/QC/CLEANED/adapterremoval/{sample}"+R2+"_trimmed_fastqc.html",sample=config["GENERAL"]["samples"])
+#               expand(config["GENERAL"]["experiment_name"]+"/trimmed/pe/{sample}_1_trimmed.fq.gz",sample=config["GENERAL"]["samples"]),
+#               expand(config["GENERAL"]["experiment_name"]+"/trimmed/pe/{sample}_2_trimmed.fq.gz",sample=config["GENERAL"]["samples"]),
+#               expand(config["GENERAL"]["experiment_name"]+"/QC/RAW/{sample}"+R1+"_fastqc.html",sample=config["GENERAL"]["samples"]),
+#               expand(config["GENERAL"]["experiment_name"]+"/QC/RAW/{sample}"+R2+"_fastqc.html",sample=config["GENERAL"]["samples"])
+#               expand(config["GENERAL"]["experiment_name"]+"/trimmed/se/{sample}.trimmed.fastq.gz",sample=config["GENERAL"]["samples"]),
+#               expand(config["GENERAL"]["experiment_name"]+"/QC/RAW/multiqc.html"),
+#               expand(config["GENERAL"]["experiment_name"]+"report/pe_wo_trimming/{sample}.html",sample=config["GENERAL"]["samples"]),
+#               expand(config["GENERAL"]["experiment_name"]+"report/pe_wo_trimming/{sample}.json",sample=config["GENERAL"]["samples"]),
+                expand(config["GENERAL"]["experiment_name"]+"/mapping/BIGWIG/{sample}_normalized.bw", sample=config["GENERAL"]["samples"]),
+#               config["GENERAL"]["experiment_name"]+"/QC/bam/{sample}.rmdups_fastqc.html"
